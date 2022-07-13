@@ -6,9 +6,18 @@ type CounterProps = {
   value: number;
   name: string;
   onDelete: (id: number) => void;
+  onIncrement: (id: number) => void;
+  onDecrement: (id: number) => void;
 };
 
-const Counter: React.FC<CounterProps> = ({ value, name, id, onDelete }) => {
+const Counter: React.FC<CounterProps> = ({
+  value,
+  name,
+  id,
+  onDelete,
+  onIncrement,
+  onDecrement,
+}) => {
   const formatValue = () => {
     return value <= 0 ? 'empty' : value;
   };
@@ -19,22 +28,14 @@ const Counter: React.FC<CounterProps> = ({ value, name, id, onDelete }) => {
     return classes;
   };
 
-  const handleIncrement = () => {
-    // setValue(value + 1);
-  };
-
-  const handleDecrement = () => {
-    // setValue(value - 1);
-  };
-
   return (
     <div>
       <span>{name}</span>
       <span className={getBageClasses()}>{formatValue()}</span>
-      <button className="btn btn-primary btn-sm m-2" onClick={handleIncrement}>
+      <button className="btn btn-primary btn-sm m-2" onClick={() => onIncrement(id)}>
         +
       </button>
-      <button className="btn btn-primary btn-sm m-2" onClick={handleDecrement}>
+      <button className="btn btn-primary btn-sm m-2" onClick={() => onDecrement(id)}>
         -
       </button>
       <button className="btn btn-danger btn-sm m-2" onClick={() => onDelete(id)}>
